@@ -1,20 +1,30 @@
-const { io } = require('../index');
+const {io} = require('../index');
+const {checkJWT} = require('../helpers/jwt');
+const {userConnected, userDisconnected, keepMessageInDB} = require('../controllers/socket');
 
 
 // Mensajes de Sockets
-io.on('connection', client => {
-    console.log('Cliente conectado');
+io.on('connection', (client) => {
+    const [valid, uid] = checkJWT(client.handshake.headers['x-token']);
+    
+    if(!valid) {return client.disconnect();}
+    
+    userConnected(uid);
 
+    // Connect user to a chatroom
+    client.join(uid);
+
+    // Listen event 'new-message'
+    client.on('new-message', async (message) => {
+        // keep message in DB
+        await keepMessageInDB(message);
+        io.to(message.to).emit('new-message', message);
+    })
+    
+
+    
     client.on('disconnect', () => {
-        console.log('Cliente desconectado');
+        userDisconnected(uid);
     });
-
-    //client.on('mensaje', ( payload ) => {
-    //    console.log('Mensaje', payload);
-
-    //    io.emit( 'mensaje', { admin: 'Nuevo mensaje' } );
-
-    //});
-
 
 });
