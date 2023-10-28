@@ -10,7 +10,7 @@ const generateJWT = (uid) => {
       }, (error, token) => {
          if (error) {
             // Token didnt create
-            reject('jsonwebtoken didnt generate');
+            reject('The Json Web Token wasnt generated.');
          } else {
             // Token generate
             resolve(token);

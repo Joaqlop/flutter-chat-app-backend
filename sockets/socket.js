@@ -3,7 +3,7 @@ const {checkJWT} = require('../helpers/jwt');
 const {userConnected, userDisconnected, keepMessageInDB} = require('../controllers/socket');
 
 
-// Mensajes de Sockets
+// Sockets
 io.on('connection', (client) => {
     const [valid, uid] = checkJWT(client.handshake.headers['x-token']);
     
@@ -20,8 +20,6 @@ io.on('connection', (client) => {
         await keepMessageInDB(message);
         io.to(message.to).emit('new-message', message);
     })
-    
-
     
     client.on('disconnect', () => {
         userDisconnected(uid);

@@ -1,10 +1,10 @@
 // path: api/login
 
-const {Router} = require('express');
-const {check} = require('express-validator');
-const {createUser, login, renewToken} = require('../controllers/auth');
-const {validate} = require('../middlewares/validate');
-const {validateJWT} = require('../middlewares/validateJWT');
+const { Router } = require('express');
+const { check } = require('express-validator');
+const { createUser, login, renewToken } = require('../controllers/auth');
+const { validate } = require('../middlewares/validate');
+const { validateJWT } = require('../middlewares/validateJWT');
 const router = Router();
 
 router.post('/new', [

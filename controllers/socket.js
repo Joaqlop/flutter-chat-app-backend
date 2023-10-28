@@ -4,9 +4,7 @@ const Message = require('../models/message');
 const userConnected = async (uid = '') => {
    const user = await Usuario.findById(uid);
    user.online = true;
-
-   console.log('Usuario conectado');
-
+   console.log('User connected.');
    await user.save();
    return user;
 }
@@ -14,7 +12,7 @@ const userConnected = async (uid = '') => {
 const userDisconnected = async (uid = '') => {
    const user = await Usuario.findById(uid);
    user.online = false;
-   console.log('Usuario desconectado');
+   console.log('User disconnected.');
    await user.save();
    return user;
 }
@@ -24,7 +22,7 @@ const keepMessageInDB = async (payload) => {
       const message = new Message(payload);
       await message.save();
       return true;
-   } catch (e) {
+   } catch (error) {
       return false;
    }
 }

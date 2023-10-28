@@ -12,7 +12,7 @@ const createUser = async (request, res = response) => {
       if (emailExists){
          return res.status(400).json({
             ok: false,
-            msg: 'El correo ya se encuentra registrado.'
+            msg: 'El correo ya se encuentra registrado. Intente nuevamente con otro.'
          });
       }
 
@@ -39,7 +39,7 @@ const createUser = async (request, res = response) => {
       console.log(error);
       res.status(500).json({
          ok: false,
-         msg: 'Problemas de server.'
+         msg: 'Server issues.'
       });
    }
 };
@@ -55,7 +55,7 @@ const login = async (request, res = response) => {
       if (!userInDB){
          return res.status(404).json({
             ok: false,
-            msg: 'Usuario no encontrado.'
+            msg: 'Usuario no encontrado. Intente nuevamente.'
          });
       }
 
@@ -64,7 +64,7 @@ const login = async (request, res = response) => {
       if (!validPassword){
          return res.status(400).json({
             ok: false,
-            msg: 'Contraseña incorrecta. Intenta nuevamente.'
+            msg: 'La contraseña es incorrecta. Intente nuevamente.'
          });
       }
 
@@ -81,7 +81,7 @@ const login = async (request, res = response) => {
       console.log(error);
       return res.status(500).json({
          ok: false,
-         msg: 'Error 500'
+         msg: 'Server issues.'
       });
    }  
 };
