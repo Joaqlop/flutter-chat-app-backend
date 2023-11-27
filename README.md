@@ -1,6 +1,6 @@
 # Chatting! Backend
 
-→ [Frontend APP Repo](https://https://github.com/Joaqlop/flutter-chat-app)
+→ [Frontend APP Repo](https://github.com/Joaqlop/flutter-chat-app)
 
 _Dependencies used:_
 * bcryptjs
